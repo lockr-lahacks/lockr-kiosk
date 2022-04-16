@@ -5,7 +5,7 @@ import HomeStack from "./HomeStack";
 import AuthStack from "./AuthStack";
 import { AuthContext } from "./AuthProvider";
 import { ActivityIndicator } from "react-native";
-import firebase from "firebase";
+import {db} from "../firebase/firebaseFunctions";
 
 export default function NavigationStack() {
   const { user, setUser } = useContext(AuthContext);
@@ -14,12 +14,21 @@ export default function NavigationStack() {
 
   //handle user state changes
   useEffect(() => {
-    const subscriber = firebase.auth().onAuthStateChanged(function (user) {
-      setUser(user);
-      if (initializing) setInitializing(false);
-      setLoading(false);
-    });
-    return subscriber; // unsubscribe on unmount
+    //listen to changes
+    const onCardChange = (querySnapshot) => {
+      if (querySnapshot.exists()) {
+        setUser(querySnapshot.val());
+        console.log("User signed in!");
+        setLoading(false);
+      }
+      else {
+        setUser("");
+      }
+    };
+    db.ref("currCard").on("value", onCardChange);
+    return () => {
+      db.ref("currCard").off("value", onCardChange);
+    };
   }, []);
 
   if (loading) {

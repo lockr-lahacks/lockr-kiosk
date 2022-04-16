@@ -7,9 +7,7 @@ export default function LoginScreen() {
   const { login } = useContext(AuthContext);
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => login()} style={styles.signinButton}>
-        <Text>Sign In or Register With Google</Text>
-      </TouchableOpacity>
+        <Text>Scan your Credit Card to Sign In!</Text>
     </View>
   );
 }
