@@ -92,7 +92,7 @@ export async function getLockrItemData(lockrId) {
     console.error(e);
   }
 }
-export async function getAllLocrItems(lockrId) {
+export async function getAllLockrItems(lockrId) {
   let res = [];
   for (let i = 1; i <= lockrId; i++) {
     res.push(await getLockrItemData(i));
