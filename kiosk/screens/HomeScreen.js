@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles.js";
 import { Text, View, Button, Image } from "react-native";
-import { manipulateDoor } from "../firebase/firebaseFunctions";
+import { manipulateDoor, magic } from "../firebase/firebaseFunctions";
 import Tileset from "./Tileset";
 
 export default function HomeScreen() {
@@ -17,10 +17,9 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style ={styles.mainTitle}>Your Lockrs</Text>
-      
-      <Tileset/>
-      
+      <Text style={styles.mainTitle}>Your Lockrs</Text>
+
+      <Tileset />
     </View>
   );
 }

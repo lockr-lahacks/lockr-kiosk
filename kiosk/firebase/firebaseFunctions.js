@@ -39,6 +39,7 @@ export async function createLockr(lockrId) {
 }
 
 export async function addNewLockrItem(
+  itemId,
   lockrId,
   name,
   depositPrice,
@@ -48,6 +49,7 @@ export async function addNewLockrItem(
 ) {
   const lockrItem = {
     name: name,
+    itemId: itemId,
     itemImage: itemImage,
     currUserId: null,
     timestampTaken: null,
