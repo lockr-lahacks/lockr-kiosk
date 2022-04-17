@@ -17,9 +17,9 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>Welcome {userName}</Text>
+      <Text style ={styles.mainTitle}>Your Lockrs</Text>
+      
       <Tileset/>
-      <Image style={styles.profileImage} source={{ uri: profilePic }} />
       
     </View>
   );

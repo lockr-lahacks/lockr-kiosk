@@ -9,7 +9,8 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 export default function HomeStack() {
   const Tab = createMaterialBottomTabNavigator();
   return (
-    <Tab.Navigator initialRouteName="Home">
+    <Tab.Navigator initialRouteName="Home"
+    barStyle={{ backgroundColor: '#558B6E' }}>
       <Tab.Screen
         name="Extra"
         component={ExtraScreen}
