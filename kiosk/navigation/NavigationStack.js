@@ -6,10 +6,11 @@ import AuthStack from "./AuthStack";
 import QRCodeScreen from "../screens/QRCodeScreen";
 import { AuthContext } from "./AuthProvider";
 import { ActivityIndicator } from "react-native";
-import {db} from "../firebase/firebaseFunctions";
+import { db } from "../firebase/firebaseFunctions";
 
 export default function NavigationStack() {
-  const { userRfid, setUserRfid, userUID, setUserUID } = useContext(AuthContext);
+  const { userRfid, setUserRfid, userUID, setUserUID } =
+    useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
   const [loading, setLoading] = useState(true);
 
@@ -17,20 +18,18 @@ export default function NavigationStack() {
   useEffect(() => {
     //listen to changes to currCard
     const onCardChange = (querySnapshot) => {
-      async function bruh(){
+      async function bruh() {
         if (querySnapshot.exists()) {
           const userRfid = querySnapshot.val();
           setUserRfid(userRfid);
           const userUIDVal = await db.ref(`userRfids/${userRfid}`).get();
-          if(userUIDVal.exists()){
+          if (userUIDVal.exists()) {
             setUserUID(userUIDVal.val());
-          }
-          else {
+          } else {
             setUserUID("");
           }
           console.log("User signed in!");
-        }
-        else {
+        } else {
           setUserRfid(null);
           setUserUID(null);
         }
@@ -39,20 +38,21 @@ export default function NavigationStack() {
       bruh();
     };
     const onRfidsChange = (querySnapshot) => {
-      async function bruh(){
-        if (querySnapshot.exists()){
+      async function bruh() {
+        if (querySnapshot.exists()) {
           const rfidsList = querySnapshot.val();
-          for(const rfid of Object.keys(rfidsList)){
+          for (const rfid of Object.keys(rfidsList)) {
             console.log(rfid);
-            const possUID=rfidsList[rfid];
-            if(possUID){
+            const possUID = rfidsList[rfid];
+            if (possUID) {
               setUserUID(possUID);
               setLoading(false);
             }
           }
         }
       }
-    }
+      bruh();
+    };
     db.ref("userRfids").on("value", onRfidsChange);
     //listen to changes to userRfids
     db.ref("currCard").on("value", onCardChange);
@@ -69,7 +69,7 @@ export default function NavigationStack() {
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>
-      {userRfid ? userUID ? <HomeStack /> : <QRCodeScreen/>  : <AuthStack />}
+      {userRfid ? userUID ? <HomeStack /> : <QRCodeScreen /> : <AuthStack />}
     </NavigationContainer>
   );
 }

@@ -8,8 +8,7 @@ export default function LoginScreen() {
   const { login } = useContext(AuthContext);
   return (
     <View style={styles.container}>
-        <Text>Scan your Credit Card to Sign In!</Text>
-
+      <Text>Scan your Credit Card to Sign In!</Text>
     </View>
   );
 }
