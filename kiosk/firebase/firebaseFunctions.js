@@ -69,7 +69,7 @@ export async function takeLockrItem(lockrId, userId) {
     if (lockrId == 2) {
       setTimeout(() => {
         manipulateDoor(true, lockrId);
-      }, 10000);
+      }, 6000);
     }
   } catch (e) {
     console.error(e);
@@ -90,7 +90,7 @@ export async function returnLockrItem(lockrId, userId) {
       if (lockrId == 2) {
         setTimeout(() => {
           manipulateDoor(true, lockrId);
-        }, 10000);
+        }, 6000);
       }
     }
   } catch (e) {
