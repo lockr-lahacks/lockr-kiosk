@@ -10,7 +10,8 @@ import {
   Image,
 } from "react-native";
 import {
-  getAllLocrItems,
+  db,
+  getAllLockrItems,
   returnLockrItem,
   takeLockrItem,
 } from "../firebase/firebaseFunctions";
@@ -85,31 +86,43 @@ const Tileset = () => {
   const [available, setAvailable] = useState([]);
 
   useEffect(() => {
-    async function bruh() {
-      let DATA = await getAllLocrItems(2);
-      let temp1 = [];
-      let temp2 = [];
-
-      for (let i = 0; i < DATA.length; i++) {
-        if (DATA[i].hasOwnProperty("currUserId") && DATA[i].currUserId !== "") {
-          DATA[i].buttonMode = false;
-          temp1.push(DATA[i]);
-        } else if (
-          !DATA[i].hasOwnProperty("currUserId") ||
-          DATA[i].currUserId === ""
-        ) {
-          DATA[i].buttonMode = true;
-          temp2.push(DATA[i]);
+    const onLockrChange = (querySnapshot) => {
+      if(querySnapshot.exists()){
+        let DATA = querySnapshot.val();
+        DATA = Object.values(DATA);
+        console.log(DATA);
+        let temp1 = [];
+        let temp2 = [];
+        for (let i = 0; i < DATA.length; i++) {
+          const currItem = DATA[i].lockrItem;
+          if (currItem.hasOwnProperty("currUserId") && currItem.currUserId !== "") {
+            currItem.buttonMode = false;
+            temp1.push(currItem);
+          } else if (
+            !currItem.hasOwnProperty("currUserId") ||
+            currItem.currUserId === ""
+          ) {
+            currItem.buttonMode = true;
+            temp2.push(currItem);
+          }
         }
+  
+        console.log("ACTIVE", temp1);
+        console.log("Available", temp2);
+  
+        setActive(temp1);
+        setAvailable(temp2);        
       }
-
-      console.log("ACTIVE", temp1);
-      console.log("Available", temp2);
-
-      setActive(temp1);
-      setAvailable(temp2);
-    }
-    bruh();
+      else {
+        setActive([]);
+        setAvailable([]);
+      }
+    };
+    //listen to lockrs
+    db.ref("lockrs").on("value", onLockrChange);
+    return(() => {
+      db.ref("lockrs").off("value", onLockrChange);
+    })
   }, []);
   const renderItem = ({ item }) => (
     <Item

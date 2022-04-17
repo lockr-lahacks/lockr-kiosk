@@ -5,7 +5,7 @@ import { Text, View, Button, Image } from "react-native";
 import { manipulateDoor } from "../firebase/firebaseFunctions";
 
 export default function ExtraScreen() {
-  const { user, logout } = useContext(AuthContext);
+  const { userRfid, logout } = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <Button title="Open Door 1" onPress={() => manipulateDoor(false, 1)} />

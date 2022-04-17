@@ -6,13 +6,13 @@ import { manipulateDoor, magic } from "../firebase/firebaseFunctions";
 import Tileset from "./Tileset";
 
 export default function HomeScreen() {
-  const { user, logout } = useContext(AuthContext);
+  const { userRfid, logout } = useContext(AuthContext);
   const [userName, setUserName] = useState("");
   const [profilePic, setProfilePic] = useState(null);
 
   useEffect(() => {
-    setUserName(user.displayName);
-    setProfilePic(user.photoURL);
+    // setUserName(user.displayName);
+    // setProfilePic(user.photoURL);
   }, []); //ComponentDidMount
 
   return (
