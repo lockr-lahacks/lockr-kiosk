@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../styles.js";
 import { Button, TextInput, View, Text } from "react-native";
 import { Formik } from "formik";
+import { setConfig } from "../firebase/firebaseFunctions";
 
 export default function UserProfileScreen() {
   return (
@@ -9,7 +10,15 @@ export default function UserProfileScreen() {
       <Text>User Profile Screen</Text>
       <Formik
         initialValues={{ itemUseTerm: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) =>
+          setConfig(
+            2,
+            "bruh",
+            values.itemUseTerm,
+            values.costForUse,
+            values.deadlineFee
+          )
+        }
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
