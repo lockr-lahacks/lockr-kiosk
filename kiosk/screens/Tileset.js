@@ -40,6 +40,7 @@ import {
 //   },
 // ];
 
+
 const Item = ({
   name,
   depositPrice,
@@ -50,7 +51,7 @@ const Item = ({
   itemId,
   lockrId,
 }) => (
-  <View style={styles.item}>
+  <View style={styles.item} backgroundColor={buttonMode ? "#558B6E" : "#9bbaa9"}>
     <Text style={styles.name} numberOfLines={1}>
       {name}
     </Text>
@@ -62,10 +63,10 @@ const Item = ({
         resizeMode={"cover"} // cover or contain its upto you view look
       />
     </View>
-    <View style={styles.itemContainer}>
-      <Text style={styles.itemBody}>Deposit cost: {depositPrice}</Text>
-      <Text style={styles.itemBody}>Deadline fee: {deadlineFee}</Text>
-      <Text style={styles.itemBody}>Duration: {duration}</Text>
+    <View style={styles.itemContainer} >
+      <Text style={styles.itemBody}>Deposit cost: ${depositPrice}</Text>
+      <Text style={styles.itemBody}>Deadline fee: ${deadlineFee}</Text>
+      <Text style={styles.itemBody}>Duration: {duration} days left</Text>
     </View>
     <Button
       title={buttonMode ? "Borrow" : "Return"}
@@ -124,6 +125,15 @@ const Tileset = () => {
       db.ref("lockrs").off("value", onLockrChange);
     })
   }, []);
+  const getColor = ({mode}) => {
+    let color = "#558B6E";
+    if(mode){
+      color = "#382633";
+    }
+    
+    return color;
+  }
+
   const renderItem = ({ item }) => (
     <Item
       name={item.name}
@@ -170,7 +180,7 @@ const styles = StyleSheet.create({
   item: {
     borderRadius: 10,
     overflow: "hidden",
-    backgroundColor: "#558B6E",
+    //backgroundColor: "#558B6E",
     padding: 15,
     width: 250,
     height: 300,
