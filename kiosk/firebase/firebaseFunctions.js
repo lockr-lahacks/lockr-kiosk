@@ -6,7 +6,6 @@ if (!firebase.apps.length) app = firebase.initializeApp(apiKeys.firebaseConfig);
 else app = firebase.app();
 export const db = app.database();
 console.log("Firebase set up!");
-
 export async function logout() {
   try {
     db.ref("currCard").set(null);
@@ -14,7 +13,6 @@ export async function logout() {
     console.error(e);
   }
 }
-
 //open or close door with isClosed to true if closed, to false if open, states with a doorID number
 export async function manipulateDoor(isClosed, doorID) {
   try {
@@ -23,21 +21,18 @@ export async function manipulateDoor(isClosed, doorID) {
     console.error(e);
   }
 }
-
 export async function createLockr(lockrId) {
   try {
     db.ref(`lockrs/${lockrId}`).set({
       lockrId: lockrId,
       isClosed: false,
       lockrItems: [],
-      ownerId: "",
       location: "",
     });
   } catch (e) {
     console.error(e);
   }
 }
-
 export async function addNewLockrItem(
   itemId,
   lockrId,
@@ -56,8 +51,8 @@ export async function addNewLockrItem(
     depositPrice: depositPrice,
     deadlineFee: deadlineFee,
     duration: duration,
+    lockrId: lockrId,
   };
-
   try {
     console.log(db.ref(`lockrs/${lockrId}/lockrItem`).set(lockrItem));
   } catch (e) {
@@ -74,7 +69,6 @@ export async function takeLockrItem(lockrId, userId) {
     console.error(e);
   }
 }
-
 export async function returnLockrItem(lockrId, userId) {
   try {
     if (
@@ -84,13 +78,13 @@ export async function returnLockrItem(lockrId, userId) {
       throw new Error("User does not own this lockr item");
     } else {
       db.ref(`lockrs/${lockrId}/lockrItem/currUserId`).set(null);
+
       db.ref(`lockrs/${lockrId}/lockrItem/timestampTaken`).set(null);
     }
   } catch (e) {
     console.error(e);
   }
 }
-
 export async function getLockrItemData(lockrId) {
   try {
     return (await db.ref(`lockrs/${lockrId}/lockrItem`).get()).val();
@@ -98,10 +92,15 @@ export async function getLockrItemData(lockrId) {
     console.error(e);
   }
 }
-
-export async function getAllLocrItems(lockrId) {
+export async function getAllLockrItems(lockrId) {
+  let res = [];
   for (let i = 1; i <= lockrId; i++) {
     res.push(await getLockrItemData(i));
   }
   return res;
+}
+export async function magic() {
+  // createLockr(2);
+  // addNewLockrItem("dfwefyvgiewugi", 2, "Umbrella", 0, 10, 500);
+  takeLockrItem(2, "bruh");
 }
