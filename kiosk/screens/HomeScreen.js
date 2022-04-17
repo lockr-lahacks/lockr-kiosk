@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles.js";
 import { Text, View, Button, Image } from "react-native";
-import {manipulateDoor} from "../firebase/firebaseFunctions";
-import Tileset from "./Tileset"
+import { manipulateDoor } from "../firebase/firebaseFunctions";
+import Tileset from "./Tileset";
 
 export default function HomeScreen() {
   const { user, logout } = useContext(AuthContext);
