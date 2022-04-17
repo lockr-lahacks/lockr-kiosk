@@ -6,8 +6,8 @@ import { setConfig } from "../firebase/firebaseFunctions";
 
 export default function UserProfileScreen() {
   return (
-    <View style={styles.container}>
-      <Text>User Profile Screen</Text>
+    <View style={styles.containeruser}>
+      <Text style={styles.containeruser1}>Lockr Configuration Screen</Text>
       <Formik
         initialValues={{ itemUseTerm: "" }}
         onSubmit={(values) =>
@@ -21,23 +21,30 @@ export default function UserProfileScreen() {
         }
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <View>
+          <View >
             <TextInput
               onChangeText={handleChange("itemUseTerm")}
               onBlur={handleBlur("itemUseTerm")}
               value={values.itemUseTerm}
+              inputProps={{style: {fontSize: 20}}}
+              InputLabelProps={{style: {fontSize: 20}}}
+              
               placeholder="Term for item use"
             />
             <TextInput
               onChangeText={handleChange("costForUse")}
               onBlur={handleBlur("costForUse")}
               value={values.costForUse}
+              inputProps={{style: {fontSize: 20}}}
+              InputLabelProps={{style: {fontSize: 20}}}
               placeholder="Cost for item use"
             />
             <TextInput
               onChangeText={handleChange("deadlineFee")}
               onBlur={handleBlur("deadlineFee")}
               value={values.deadlineFee}
+              inputProps={{style: {fontSize: 20}}}
+              InputLabelProps={{style: {fontSize: 20}}}
               placeholder="Fee for deadline"
             />
 

@@ -17,7 +17,7 @@ export default function ExtraScreen() {
       <Text style={styles.qrcode}>Scan the QR code to link your credit card!</Text>
       <SvgQRCode value={userRfid} size={200} 
       />
-      <Button title="Log Out" onPress={logout} />
+      <Button title="Go Back" onPress={logout} />
       <View style={styles.qrcodebottom}></View>
       <View style={styles.qrcodebottom2}></View>
     </View>

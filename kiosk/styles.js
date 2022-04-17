@@ -9,6 +9,24 @@ export default StyleSheet.create({
     justifyContent: "center",
     padding: 10,
   },
+  containeruser: {
+    flex: 1,
+    marginTop: 10,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    fontSize: 30,
+  },
+  containeruser1: {
+    backgroundColor: "#fff",
+    marginBottom: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    fontSize: 30,
+  },
+  
   signinButton: {
     alignItems: "center",
     backgroundColor: "#b3d0ff",
@@ -61,5 +79,29 @@ export default StyleSheet.create({
     width: 1200,
     height: 370,
     alignItems: "center",
+  },
+  login: {
+    flex: 1,
+    marginTop: 10,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    fontSize: 30,
+  },
+  login2: {
+    flex: 1,
+    marginTop: 10,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    fontSize: 30,
+  },
+  login3:{
+    fontSize: 40,
+    marginTop: 10,
   }
+  
+  
 });
