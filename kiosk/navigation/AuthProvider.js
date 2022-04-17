@@ -3,12 +3,15 @@ import { login, logout } from "../firebase/firebaseFunctions";
 import { useState } from "react";
 export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [userRfid, setUserRfid] = useState("");
+  const [userUID, setUserUID] = useState("");
   return (
     <AuthContext.Provider
       value={{
-        user,
-        setUser,
+        userRfid,
+        setUserRfid,
+        userUID,
+        setUserUID,
         login: login,
         logout: logout,
       }}

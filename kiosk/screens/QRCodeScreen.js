@@ -3,17 +3,15 @@ import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles.js";
 import { Text, View, Button, Image } from "react-native";
 import {manipulateDoor} from "../firebase/firebaseFunctions";
+import SvgQRCode from 'react-native-qrcode-svg';
 
 export default function ExtraScreen() {
   const { userRfid, logout } = useContext(AuthContext);
   return (
     <View style={styles.container}>
-      <Button title="Open Door 1" onPress={() =>manipulateDoor(false,1)}/>
-      <Button title="Close Door 1" onPress={() =>manipulateDoor(true, 1)}/>
-      <Button title="Open Door 2" onPress={() =>manipulateDoor(false,2)}/>
-      <Button title="Close Door 2" onPress={() =>manipulateDoor(true, 2)}/>     
-      <Button onPress={logout} title="Log Out" />
-      <Text>An Extra Screen</Text>
+      <Text>QR Code Screen!</Text>
+      <SvgQRCode value={userRfid}/>
+      <Button title="Log Out" onPress={logout} />
     </View>
   );
 }
