@@ -18,9 +18,7 @@ export async function logout() {
 //open or close door with isClosed to true if closed, to false if open, states with a doorID number
 export async function manipulateDoor(isClosed, doorID){
   try {
-    db.ref("lockrs/"+doorID).set({
-      closed: isClosed,
-    });
+    db.ref("lockrs/"+doorID).set(isClosed);
   }
   catch (e) {
     console.error(e);
