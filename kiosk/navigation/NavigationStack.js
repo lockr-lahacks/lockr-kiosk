@@ -30,23 +30,36 @@ export default function NavigationStack() {
           }
           console.log("User signed in!");
         }
+        else {
+          setUserRfid(null);
+          setUserUID(null);
+        }
         setLoading(false);
       }
       bruh();
     };
-    // const onRfidsChange = (querySnapshot) => {
-    //   async function bruh(){
-    //     if (querySnapshot.exists()){
-    //       const rfidsList = querySnapshot.val();
-    //       for(const rfidList of)
-    //     }
-    //   }
-    // }
+    const onRfidsChange = (querySnapshot) => {
+      async function bruh(){
+        if (querySnapshot.exists()){
+          const rfidsList = querySnapshot.val();
+          for(const rfid of Object.keys(rfidsList)){
+            console.log(rfid);
+            const possUID=rfidsList[rfid];
+            if(possUID){
+              setUserUID(possUID);
+              setLoading(false);
+            }
+          }
+        }
+      }
+    }
+    db.ref("userRfids").on("value", onRfidsChange);
     //listen to changes to userRfids
-    // db.ref("currCard").on("value", onCardChange);
-    // return () => {
-    //   db.ref("currCard").off("value", onCardChange);
-    // };
+    db.ref("currCard").on("value", onCardChange);
+    return () => {
+      db.ref("currCard").off("value", onCardChange);
+      db.ref("userRfids").off("value", onRfidsChange);
+    };
   }, []);
 
   if (loading) {

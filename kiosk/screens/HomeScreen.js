@@ -11,8 +11,8 @@ export default function HomeScreen() {
   const [profilePic, setProfilePic] = useState(null);
 
   useEffect(() => {
-    setUserName(user.displayName);
-    setProfilePic(user.photoURL);
+    // setUserName(user.displayName);
+    // setProfilePic(user.photoURL);
   }, []); //ComponentDidMount
 
   return (
