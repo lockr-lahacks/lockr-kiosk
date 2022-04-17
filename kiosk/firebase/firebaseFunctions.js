@@ -65,6 +65,12 @@ export async function takeLockrItem(lockrId, userId) {
     db.ref(`lockrs/${lockrId}/lockrItem/timestampTaken`).set(
       firebase.database.ServerValue.TIMESTAMP
     );
+    manipulateDoor(false, lockrId);
+    if (lockrId == 2) {
+      setTimeout(() => {
+        manipulateDoor(true, lockrId);
+      }, 10000);
+    }
   } catch (e) {
     console.error(e);
   }
@@ -80,6 +86,12 @@ export async function returnLockrItem(lockrId, userId) {
       db.ref(`lockrs/${lockrId}/lockrItem/currUserId`).set(null);
 
       db.ref(`lockrs/${lockrId}/lockrItem/timestampTaken`).set(null);
+      manipulateDoor(false, lockrId);
+      if (lockrId == 2) {
+        setTimeout(() => {
+          manipulateDoor(true, lockrId);
+        }, 10000);
+      }
     }
   } catch (e) {
     console.error(e);
@@ -100,7 +112,29 @@ export async function getAllLockrItems(lockrId) {
   return res;
 }
 export async function magic() {
-  // createLockr(2);
-  // addNewLockrItem("dfwefyvgiewugi", 2, "Umbrella", 0, 10, 500);
-  takeLockrItem(2, "bruh");
+  createLockr(2);
+  addNewLockrItem("dfwefyvgiewugi", 2, "Umbrella", 0, 10, 500);
+  // takeLockrItem(2, "bruh");
+}
+
+export async function setConfig(
+  lockrId,
+  ownerId,
+  termForUse,
+  costForUse,
+  deadlineFee
+) {
+  console.log(lockrId, ownerId, termForUse, costForUse, deadlineFee);
+  try {
+    let thing = (await db.ref(`lockrs/${lockrId}/`).get()).val();
+    console.log(thing);
+    thing.lockrItem["lockrId"] = lockrId;
+    thing.ownerId = ownerId;
+    thing.lockrItem.duration = +termForUse;
+    thing.lockrItem.depositPrice = +costForUse;
+    thing.lockrItem.deadlineFee = +deadlineFee;
+    db.ref(`lockrs/${lockrId}`).set(thing);
+  } catch (e) {
+    console.error(e);
+  }
 }
