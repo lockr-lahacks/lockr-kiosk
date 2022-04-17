@@ -51,6 +51,7 @@ export async function addNewLockrItem(
     depositPrice: depositPrice,
     deadlineFee: deadlineFee,
     duration: duration,
+    lockrId: lockrId,
   };
   try {
     console.log(db.ref(`lockrs/${lockrId}/lockrItem`).set(lockrItem));

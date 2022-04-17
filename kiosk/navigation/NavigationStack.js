@@ -5,7 +5,7 @@ import HomeStack from "./HomeStack";
 import AuthStack from "./AuthStack";
 import { AuthContext } from "./AuthProvider";
 import { ActivityIndicator } from "react-native";
-import {db} from "../firebase/firebaseFunctions";
+import { db } from "../firebase/firebaseFunctions";
 
 export default function NavigationStack() {
   const { user, setUser } = useContext(AuthContext);
@@ -20,8 +20,7 @@ export default function NavigationStack() {
         setUser(querySnapshot.val());
         console.log("User signed in!");
         setLoading(false);
-      }
-      else {
+      } else {
         setUser("");
       }
     };

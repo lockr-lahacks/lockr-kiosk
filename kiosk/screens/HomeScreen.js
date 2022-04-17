@@ -18,7 +18,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.mainTitle}>Lockrs at this location</Text>
-      
+
       <Tileset />
     </View>
   );
