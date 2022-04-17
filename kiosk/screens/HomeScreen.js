@@ -3,6 +3,7 @@ import { AuthContext } from "../navigation/AuthProvider";
 import styles from "../styles.js";
 import { Text, View, Button, Image } from "react-native";
 import {manipulateDoor} from "../firebase/firebaseFunctions";
+import Tileset from "./Tileset"
 
 export default function HomeScreen() {
   const { user, logout } = useContext(AuthContext);
@@ -17,12 +18,9 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text>Welcome {userName}</Text>
+      <Tileset/>
       <Image style={styles.profileImage} source={{ uri: profilePic }} />
-      <Button title="Open Door 1" onPress={() =>manipulateDoor(false,1)}/>
-      <Button title="Close Door 1" onPress={() =>manipulateDoor(true, 1)}/>
-      <Button title="Open Door 2" onPress={() =>manipulateDoor(false,2)}/>
-      <Button title="Close Door 2" onPress={() =>manipulateDoor(true, 2)}/>     
-      <Button onPress={logout} title="Log Out" />
+      
     </View>
   );
 }
